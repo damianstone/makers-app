@@ -41,13 +41,25 @@
   justify-content: flex-start;
   margin-top: 20px;
   margin-bottom: 20px;
+  flex-direction: column;
 }
 
 .profileImageContainer {
   width: 100px;
   height: 100px;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   border-radius: 10px;
+}
+
+.profileImage {
+  max-width: 100%;
+  min-height: 100%;
+  border-radius: 10px;
+}
+
+.inputImage {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .saveButtonContainer {

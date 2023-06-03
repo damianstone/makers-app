@@ -10,6 +10,17 @@ import TextTareaInput from '../../components/textTarea/TextTareaInput';
 
 const Profile = () => {
   const [changedProperties, setChangedProperties] = useState({});
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [companyLogo, setCompanyLogo] = useState(null);
+
+  const handleImageUpload = (event, type) => {
+    if (type === 'company') {
+      setCompanyLogo(URL.createObjectURL(event.target.files[0]));
+    }
+    if (type === 'profile') {
+      setProfilePhoto(URL.createObjectURL(event.target.files[0]));
+    }
+  };
 
   const handleChange = (backend_property, value) => {
     console.log(changedProperties);
@@ -104,8 +115,18 @@ const Profile = () => {
             </div>
             <div className='profileImageWrapper'>
               <div className='profileImageContainer'>
-                <image className='profileImage' />
+                <img
+                  className='profileImage'
+                  src={profilePhoto}
+                  alt='Profile'
+                />
               </div>
+              <input
+                type='file'
+                accept='image/*'
+                onChange={(e) => handleImageUpload(e, 'profile')}
+                className='inputImage'
+              />
             </div>
             {renderInputs(PROFILE_INPUTS)}
           </div>
@@ -115,8 +136,18 @@ const Profile = () => {
             </div>
             <div className='profileImageWrapper'>
               <div className='profileImageContainer'>
-                <image className='profileImage' />
+                <img
+                  className='profileImage'
+                  src={companyLogo}
+                  alt='Company logo'
+                />
               </div>
+              <input
+                type='file'
+                accept='image/*'
+                onChange={(e) => handleImageUpload(e, 'company')}
+                className='inputImage'
+              />
             </div>
             {renderInputs(COMPANY_INPUTS)}
           </div>
