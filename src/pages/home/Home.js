@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import { listProfiles } from '../../store/actions/actions';
-import { CARDS } from '../../data/cards';
 import Navbar from '../../components/navbar/Navbar';
 import SideBar from '../../components/sidebar/SideBar';
 import Card from '../../components/card/Card';
@@ -14,8 +13,13 @@ const Home = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  let path = location.pathname.substring(1);
-  path = path.charAt(0).toUpperCase() + path.slice(1);
+  const path = location.pathname.substring(1);
+  let pathTitle;
+  if (path === 'startup') {
+    pathTitle = 'Startups';
+  } else {
+    pathTitle = 'Corporations';
+  }
 
   const listProfilesReducer = useSelector((state) => state.listProfiles);
   const { data, loading, error } = listProfilesReducer;
@@ -29,30 +33,39 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(listProfiles());
-  }, []);
+    dispatch(listProfiles(path, null));
+    setParam(null);
+  }, [path]);
 
   const handleFilter = (param) => {
     setParam(param);
+    dispatch(listProfiles(path, param));
   };
 
   const navigate = (section) => {
     history.push(`/${section}`);
   };
 
-  console.log(data, loading, error);
+  const navNavigate = (companyType) => {
+    setParam(null);
+    dispatch(listProfiles(companyType, null));
+    history.push(`/${companyType}`);
+  };
 
   return (
     <div className='homeScreen'>
-      <Navbar />
+      <Navbar navigate={navNavigate} />
       <div className='contentSection'>
         <SideBar navigate={navigate} handleFilter={(f) => handleFilter(f)} />
         <div className='cards'>
-          <p className='cardsTitle'>{`${path} ${
+          <p className='cardsTitle'>{`${pathTitle} ${
             param ? ' - ' + param : ''
           }`}</p>
+          {error && <p>Something went wrong</p>}
           {loading && <p>Loading...</p>}
+          {data && data.length <= 0 && <p>{`No ${pathTitle} found ;(`}</p>}
           {data &&
+            data.length > 0 &&
             data.map((obj) => (
               <Card
                 companyPhoto={obj.company_photo}

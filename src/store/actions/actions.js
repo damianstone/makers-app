@@ -131,7 +131,7 @@ export const getUser = () => {
 
 // * --------------------------------------- PROFILES / COMPANIES ------------------------------------------------
 
-export const listProfiles = () => {
+export const listProfiles = (companyTypeParam, industryParam) => {
   return async (dispatch) => {
     try {
       dispatch({ type: c.LIST_PROFILES_REQUEST });
@@ -146,10 +146,12 @@ export const listProfiles = () => {
 
       const { data } = await axios({
         method: 'GET',
-        url: `${BASE_URL}/api/users/?company_type=startup`,
+        url: `${BASE_URL}/api/users/?company_type=${
+          companyTypeParam ? companyTypeParam : 'startup'
+        }${industryParam ? '&company_industry=' + industryParam : ''}`,
         headers: config,
       });
-      
+
       dispatch({
         type: c.LIST_PROFILES_SUCCESS,
         payload: data,

@@ -29,7 +29,7 @@ const Login = () => {
     const valueFromLocalStorage = localStorage.getItem('@userData');
 
     if (valueFromLocalStorage) {
-      history.push('/startups');
+      history.push('/startup');
     }
   }, []);
 
@@ -46,7 +46,7 @@ const Login = () => {
   };
 
   if (registerUser || userLogin) {
-    history.push('/startups');
+    history.push('/startup');
   }
 
   return (

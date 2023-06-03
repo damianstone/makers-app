@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { logout, getUser } from '../../store/actions/actions';
+import { logout, getUser, listProfiles } from '../../store/actions/actions';
 
 import './Navbar.css';
 
 const BASE_URL = 'http://127.0.0.1:8000';
 
-const Navbar = () => {
+const Navbar = ({ navigate }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -38,23 +38,17 @@ const Navbar = () => {
       </div>
       <div className='navBarContainer'>
         <div className='navBarItemsContainer'>
-          <div
-            className='itemContainer'
-            onClick={() => history.push('/startups')}
-          >
+          <div className='itemContainer' onClick={() => navigate('startup')}>
             <p>Startups</p>
           </div>
           <div
             className='itemContainer'
-            onClick={() => history.push('/corporations')}
+            onClick={() => navigate('corporation')}
           >
             <p>Corporations</p>
           </div>
 
-          <div
-            className='itemContainer'
-            onClick={() => history.push('/corporations')}
-          >
+          <div className='itemContainer'>
             <p>{data?.firstname}</p>
           </div>
         </div>
