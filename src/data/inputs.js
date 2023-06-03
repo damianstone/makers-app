@@ -142,13 +142,6 @@ export const COMPANY_INPUTS = [
     required: true,
   },
   {
-    id: 'company_description',
-    backend_property: 'company_description',
-    label: 'Company Description',
-    type: 'text',
-    required: true,
-  },
-  {
     id: 'company_valuation',
     backend_property: 'company_valuation',
     label: 'Company Valuation (USD)',

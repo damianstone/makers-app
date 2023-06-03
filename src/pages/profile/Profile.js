@@ -6,11 +6,27 @@ import SelectInput from '../../components/select/SelectInput';
 import MultipleSelect from '../../components/multiSelect/MultiSelect';
 import Navbar from '../../components/navbar/Navbar';
 import './Profile.css';
+import TextTareaInput from '../../components/textTarea/TextTareaInput';
 
 const Profile = () => {
   const [changedProperties, setChangedProperties] = useState({});
 
-  const handleChange = () => {};
+  const handleChange = (backend_property, value) => {
+    console.log(changedProperties);
+    console.log(backend_property, value);
+
+    if (backend_property === 'interests') {
+      setChangedProperties({
+        ...changedProperties,
+        [backend_property]: [...value],
+      });
+    } else {
+      setChangedProperties({
+        ...changedProperties,
+        [backend_property]: value,
+      });
+    }
+  };
 
   const renderInputs = (INPUTS) => {
     return INPUTS.map((input) => {
@@ -20,8 +36,10 @@ const Profile = () => {
             key={input.id}
             id={input.id}
             label={input.label}
-            handleChange={() => {}}
-            value={''}
+            handleChange={(event) =>
+              handleChange(input.backend_property, event.target.value)
+            }
+            value={changedProperties[input.backend_property]}
           />
         );
       }
@@ -33,8 +51,10 @@ const Profile = () => {
             id={input.id}
             label={input.label}
             options={input.options}
-            handleChange={() => {}}
-            value={''}
+            handleChange={(event) =>
+              handleChange(input.backend_property, event.target.value)
+            }
+            value={changedProperties[input.backend_property]}
           />
         );
       }
@@ -45,8 +65,27 @@ const Profile = () => {
             id={input.id}
             label={input.label}
             options={input.options}
-            handleChange={() => {}}
-            value={''}
+            handleChange={(event) => {
+              handleChange(input.backend_property, event.target.value);
+            }}
+            values={
+              changedProperties[input.backend_property]
+                ? changedProperties[input.backend_property]
+                : []
+            }
+          />
+        );
+      }
+
+      if (input.type === 'texttarea') {
+        return (
+          <TextTareaInput
+            key={input.id}
+            label={input.label}
+            handleChange={(event) =>
+              handleChange(input.backend_property, event.target.value)
+            }
+            value={changedProperties[input.backend_property]}
           />
         );
       }

@@ -26,19 +26,19 @@ const getStyles = (name, personName, theme) => {
   };
 };
 
-const MultipleSelect = ({ label, options }) => {
+const MultipleSelect = ({ label, options, handleChange, values }) => {
   const theme = useTheme();
   const [option, setOption] = React.useState([]);
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setOption(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value
-    );
-  };
+  // const handleChange = (event) => {
+  //   const {
+  //     target: { value },
+  //   } = event;
+  //   setOption(
+  //     // On autofill we get a stringified value.
+  //     typeof value === 'string' ? value.split(',') : value
+  //   );
+  // };
 
   return (
     <Box
@@ -47,13 +47,11 @@ const MultipleSelect = ({ label, options }) => {
         maxWidth: '100%',
       }}
     >
-      <InputLabel id='demo-multiple-name-label'>{label}</InputLabel>
+      <InputLabel>{label}</InputLabel>
       <Select
-        labelId='demo-multiple-name-label'
-        id='demo-multiple-name'
         multiple
         fullWidth
-        value={option}
+        value={values}
         onChange={handleChange}
         input={<OutlinedInput label={label} />}
         MenuProps={MenuProps}
@@ -62,7 +60,7 @@ const MultipleSelect = ({ label, options }) => {
           <MenuItem
             key={value.id}
             value={value.label}
-            style={getStyles(value.label, option, theme)}
+            style={getStyles(value.label, values, theme)}
           >
             {value.label}
           </MenuItem>
