@@ -134,7 +134,7 @@ export const getUser = () => {
 export const listProfiles = () => {
   return async (dispatch) => {
     try {
-      dispatch({ type: c.LOGIN_REQUEST });
+      dispatch({ type: c.LIST_PROFILES_REQUEST });
 
       const userData = JSON.parse(await localStorage.getItem('@userData'));
 
@@ -146,24 +146,17 @@ export const listProfiles = () => {
 
       const { data } = await axios({
         method: 'GET',
-        url: `${BASE_URL}/api/users/${userData.id}/`,
+        url: `${BASE_URL}/api/users/?company_type=startup`,
         headers: config,
       });
-
-      await localStorage.setItem(
-        '@userData',
-        JSON.stringify({
-          ...data,
-        })
-      );
-
+      
       dispatch({
-        type: c.LOGIN_SUCCESS,
+        type: c.LIST_INVITATIONS_SUCCESS,
         payload: data,
       });
     } catch (error) {
       dispatch({
-        type: c.LOGIN_FAIL,
+        type: c.LIST_PROFILES_FAIL,
         payload: error,
       });
     }

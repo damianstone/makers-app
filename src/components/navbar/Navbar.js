@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { logout } from '../../store/actions/actions';
+import { logout, getUser } from '../../store/actions/actions';
 
 import './Navbar.css';
 
@@ -12,19 +12,19 @@ const Navbar = () => {
   const history = useHistory();
 
   const currentUser = useSelector((state) => state.userLogin);
-  const { data } = currentUser;
-  console.log(data);
+  const { data, loading, error } = currentUser;
 
   useEffect(() => {
     const valueFromLocalStorage = localStorage.getItem('@userData');
 
-    if (!valueFromLocalStorage) {
+    if (!valueFromLocalStorage || error) {
+      dispatch(logout());
       history.push('/login');
     }
     if (!data && valueFromLocalStorage) {
-      // get current profile
+      dispatch(getUser());
     }
-  });
+  }, [error]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -50,6 +50,13 @@ const Navbar = () => {
           >
             <p>Corporations</p>
           </div>
+
+          <div
+            className='itemContainer'
+            onClick={() => history.push('/corporations')}
+          >
+            <p>{data?.firstname}</p>
+          </div>
         </div>
 
         <div className='avatarWrapper'>
@@ -57,10 +64,15 @@ const Navbar = () => {
             className='avatarContainer'
             onClick={() => history.push('/profile')}
           >
-            <image
-              className='avatarStyle'
-              src={`${BASE_URL}/api/users${data?.photo}`}
-            />
+            {loading && <p>Loading</p>}
+            {data?.photo && !loading && (
+              <img
+                className='avatarStyle'
+                src={`${BASE_URL}/static${data.photo}`}
+                alt='profile'
+              />
+            )}
+            {!data?.photo && !loading && <p>${data.email}</p>}
           </div>
           <p className='logoutText' onClick={handleLogout}>
             LOGOUT

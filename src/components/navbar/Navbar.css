@@ -57,6 +57,11 @@
   height: 70px;
   background-color: orange;
   cursor: pointer;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .avatarStyle {
@@ -64,6 +69,7 @@
   height: 100%;
   cursor: pointer;
   border-radius: 100px;
+  object-fit: cover;
 }
 
 .logoutText {

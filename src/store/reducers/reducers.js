@@ -49,16 +49,13 @@ export const listProfilesReducer = (state = {}, action) => {
     case c.LIST_PROFILES_REQUEST:
       return {
         loading: true,
-        success: false,
       };
     case c.LIST_PROFILES_SUCCESS:
       return {
         data: { ...action.payload },
-        success: true,
       };
     case c.LIST_PROFILES_FAIL:
       return {
-        loading: false,
         error: action.payload,
       };
     case c.LIST_PROFILES_RESET:
