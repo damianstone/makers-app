@@ -3,11 +3,19 @@ import thunk from 'redux-thunk';
 import {
   userRegisterReducer,
   userLoginReducer,
+  listProfilesReducer,
+  updateProfileReducer,
+  listInvitationsReducer,
+  sendInvitationReducer,
 } from './reducers/reducers';
 
 const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userLogin: userLoginReducer,
+  listProfiles: listProfilesReducer,
+  updateProfile: updateProfileReducer,
+  listInvitations: listInvitationsReducer,
+  sendInvitation: sendInvitationReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem('@userData')
@@ -15,7 +23,7 @@ const userInfoFromStorage = localStorage.getItem('@userData')
   : null;
 
 const initialState = {
-  userLogin: { userInfo: userInfoFromStorage },
+  userLogin: { data: userInfoFromStorage },
 };
 
 const middleware = [thunk];

@@ -59,6 +59,13 @@
   cursor: pointer;
 }
 
+.avatarStyle {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border-radius: 100px;
+}
+
 .logoutText {
   cursor: pointer;
   margin: 0;
