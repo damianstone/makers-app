@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
+import Box from '@mui/material/Box';
 import Select from '@mui/material/Select';
 
 const ITEM_HEIGHT = 48;
@@ -26,7 +26,7 @@ const getStyles = (name, personName, theme) => {
   };
 };
 
-const MultipleSelect = ({ label, valueList }) => {
+const MultipleSelect = ({ label, options }) => {
   const theme = useTheme();
   const [option, setOption] = React.useState([]);
 
@@ -41,31 +41,34 @@ const MultipleSelect = ({ label, valueList }) => {
   };
 
   return (
-    <div>
-      <FormControl sx={{ m: 1, width: '75%' }}>
-        <InputLabel id='demo-multiple-name-label'>{label}</InputLabel>
-        <Select
-          labelId='demo-multiple-name-label'
-          id='demo-multiple-name'
-          multiple
-          fullWidth
-          value={option}
-          onChange={handleChange}
-          input={<OutlinedInput label={label} />}
-          MenuProps={MenuProps}
-        >
-          {valueList.map((value) => (
-            <MenuItem
-              key={value.id}
-              value={value.label}
-              style={getStyles(value.label, option, theme)}
-            >
-              {value.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
+    <Box
+      sx={{
+        width: 500,
+        maxWidth: '100%',
+      }}
+    >
+      <InputLabel id='demo-multiple-name-label'>{label}</InputLabel>
+      <Select
+        labelId='demo-multiple-name-label'
+        id='demo-multiple-name'
+        multiple
+        fullWidth
+        value={option}
+        onChange={handleChange}
+        input={<OutlinedInput label={label} />}
+        MenuProps={MenuProps}
+      >
+        {options.map((value) => (
+          <MenuItem
+            key={value.id}
+            value={value.label}
+            style={getStyles(value.label, option, theme)}
+          >
+            {value.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </Box>
   );
 };
 

@@ -1,37 +1,27 @@
 import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
+import Box from '@mui/material/Box';
 import Select from '@mui/material/Select';
 
-const SelectInput = ({ options }) => {
-  const [age, setAge] = React.useState('');
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
+const SelectInput = ({ options, label, value, handleChange }) => {
   return (
-    <div>
-      <FormControl sx={{ m: 1, minWidth: '75%' }}>
-        <InputLabel id='demo-simple-select-autowidth-label'>Age</InputLabel>
-        <Select
-          labelId='demo-simple-select-autowidth-label'
-          id='demo-simple-select-autowidth'
-          value={age}
-          onChange={handleChange}
-          autoWidth
-          label='Age'
-        >
-          <MenuItem value=''>
-            <em>None</em>
-          </MenuItem>
-          {options.map((option) => (
-            <MenuItem value={option.value}>{option.label}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
+    <Box
+      sx={{
+        width: 500,
+        maxWidth: '100%',
+      }}
+    >
+      <InputLabel>{label}</InputLabel>
+      <Select value={value} onChange={handleChange} fullWidth label='Age'>
+        <MenuItem value=''>
+          <em>None</em>
+        </MenuItem>
+        {options.map((option) => (
+          <MenuItem value={option.value}>{option.label}</MenuItem>
+        ))}
+      </Select>
+    </Box>
   );
 };
 

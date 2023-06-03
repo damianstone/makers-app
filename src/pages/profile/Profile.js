@@ -10,24 +10,45 @@ import './Profile.css';
 const Profile = () => {
   const [changedProperties, setChangedProperties] = useState({});
 
+  const handleChange = () => {};
+
   const renderInputs = (INPUTS) => {
     return INPUTS.map((input) => {
       if (input.type === 'text') {
         return (
           <TextInput
             key={input.id}
-            label={input.label}
-            onChange={() => {}}
             id={input.id}
+            label={input.label}
+            handleChange={() => {}}
+            value={''}
           />
         );
       }
 
       if (input.type === 'select') {
-        return <SelectInput label={'Name'} options={input.options} />;
+        return (
+          <SelectInput
+            key={input.id}
+            id={input.id}
+            label={input.label}
+            options={input.options}
+            handleChange={() => {}}
+            value={''}
+          />
+        );
       }
       if (input.type === 'multiselect') {
-        return <MultipleSelect label={'id'} valueList={input.options} />;
+        return (
+          <MultipleSelect
+            key={input.id}
+            id={input.id}
+            label={input.label}
+            options={input.options}
+            handleChange={() => {}}
+            value={''}
+          />
+        );
       }
       return null;
     });
@@ -36,18 +57,34 @@ const Profile = () => {
   return (
     <div className='profileScreen'>
       <Navbar />
-      <div className='profileContainer'>
-        <div className='profileInformationContainer'>
-          <div className='profileTitleContainer'>
-            <p className='profileTitleText'>My Profile</p>
+      <div className='profileWrapper'>
+        <div className='profileContainer'>
+          <div className='profileInformationContainer'>
+            <div className='profileTitleContainer'>
+              <p className='profileTitleText'>My Profile</p>
+            </div>
+            <div className='profileImageWrapper'>
+              <div className='profileImageContainer'>
+                <image className='profileImage' />
+              </div>
+            </div>
+            {renderInputs(PROFILE_INPUTS)}
           </div>
-          {renderInputs(PROFILE_INPUTS)}
+          <div className='profileInformationContainer'>
+            <div className='profileTitleContainer'>
+              <p className='profileTitleText'>Company information</p>
+            </div>
+            <div className='profileImageWrapper'>
+              <div className='profileImageContainer'>
+                <image className='profileImage' />
+              </div>
+            </div>
+            {renderInputs(COMPANY_INPUTS)}
+          </div>
         </div>
-        <div className='profileInformationContainer'>
-          <div className='profileTitleContainer'>
-            <p className='profileTitleText'>Company information</p>
-          </div>
-          {renderInputs(COMPANY_INPUTS)}
+
+        <div className='saveButtonContainer'>
+          <button className='saveButton'>Save information</button>
         </div>
       </div>
     </div>

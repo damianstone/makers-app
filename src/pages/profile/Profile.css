@@ -2,8 +2,11 @@
   flex: 1;
   padding: 15px;
   overflow-x: hidden;
-  overflow-y: hidden;
-  height: 100vh;
+}
+
+.profileWrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 .profileContainer {
@@ -19,15 +22,42 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  min-height: 100vh;
+  min-height: 70vh;
 }
 
 .profileTitleContainer {
-  padding: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .profileTitleText {
   font-size: 30px;
   padding: 0;
   margin: 0;
+}
+
+.profileImageWrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.profileImageContainer {
+  width: 100px;
+  height: 100px;
+  background-color: #D9D9D9;
+  border-radius: 10px;
+}
+
+.saveButtonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.saveButton {
+  width: 20%;
+  height: 50px;
+  cursor: pointer;
 }

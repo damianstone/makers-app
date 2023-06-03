@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 
 import './TextInput.css';
 
-const TextInput = ({ label, onChange, id }) => {
+const TextInput = ({ label, handleChange, id, value }) => {
   return (
     <div className='inputComponent'>
       <Box
@@ -13,7 +13,13 @@ const TextInput = ({ label, onChange, id }) => {
           maxWidth: '100%',
         }}
       >
-        <TextField fullWidth label={label} id={id} onChange={onChange} />
+        <TextField
+          fullWidth
+          label={label}
+          id={id}
+          onChange={handleChange}
+          value={value}
+        />
       </Box>
     </div>
   );
