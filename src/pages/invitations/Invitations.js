@@ -6,15 +6,12 @@ import { CARDS } from '../../data/cards';
 import Navbar from '../../components/navbar/Navbar';
 import SideBar from '../../components/sidebar/SideBar';
 import Card from '../../components/card/Card';
-import './Home.css';
+import './Invitations.css';
 
-const Home = () => {
+const Invitations = () => {
   const [param, setParam] = useState(null);
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation();
-  let path = location.pathname.substring(1);
-  path = path.charAt(0).toUpperCase() + path.slice(1);
 
   const handleFilter = (param) => {
     console.log(param);
@@ -31,9 +28,7 @@ const Home = () => {
       <div className='contentSection'>
         <SideBar navigate={navigate} handleFilter={(f) => handleFilter(f)} />
         <div className='cards'>
-          <p className='cardsTitle'>{`${path} ${
-            param ? ' - ' + param : ''
-          }`}</p>
+          <p className='cardsTitle'>Invitations for meetings</p>
           {CARDS.map((obj) => (
             <Card
               companyPhoto={obj.company_photo}
@@ -55,4 +50,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Invitations;

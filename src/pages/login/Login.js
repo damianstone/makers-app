@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as f from '../../store/actions/actions';
 
-import Input from '../../components/Input';
+import LoginInput from '../../components/LoginInput';
 import './Login.css';
 
 const Login = () => {
@@ -29,13 +29,14 @@ const Login = () => {
     const valueFromLocalStorage = localStorage.getItem('@userData');
     setAuth(valueFromLocalStorage);
 
+    console.log(valueFromLocalStorage);
+
     if (auth) {
-      history.goBack();
+      history.push('/startups');
     }
   }, []);
 
   const handleLogin = () => {
-    console.log('login');
     if (email && password) {
       disptach(f.login(email, password));
     }
@@ -48,34 +49,35 @@ const Login = () => {
   };
 
   if (registerUser || userLogin) {
-    history.goBack();
+    history.push('/startups');
   }
 
   return (
     <div className='screen'>
       <div className='welcomeContainer'>
-        <h3 className='welcomeText'>Welcome to GaaS</h3>
+        <h3 className='welcomeText'>Startups x Corporations</h3>
       </div>
-      {registerError ||
-        (loginError && <p className='text'>Ups there is an error</p>)}
+      {registerError || loginError ? (
+        <p className='text'>Ups there is an error</p>
+      ) : null}
       {loadingLogin || loadingRegister ? (
         <p className='text'>Loading...</p>
       ) : (
         <>
           <div className='inputContainer'>
-            <Input
+            <LoginInput
               onChange={(e) => setEmail(e.target.value)}
               label='email'
               value={email}
             />
-            <Input
+            <LoginInput
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               label='password'
               type='password'
             />
             {register ? (
-              <Input
+              <LoginInput
                 onChange={(e) => setRepeatedPassword(e.target.value)}
                 label='Repeat password'
                 value={repeatedPassword}
@@ -83,13 +85,13 @@ const Login = () => {
               />
             ) : null}
           </div>
-          <div className='createContainerButton'>
-            <p
-              className='createButton'
+          <div className='loginButtonContainer'>
+            <buttton
+              className='loginButton'
               onClick={register ? handleRegister : handleLogin}
             >
               {register ? 'Register' : 'Login'}
-            </p>
+            </buttton>
           </div>
           <div>
             {register ? (

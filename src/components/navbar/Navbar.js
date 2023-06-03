@@ -1,10 +1,18 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { logout } from '../../store/actions/actions';
 
 import './Navbar.css';
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    history.push('/login');
+  };
 
   return (
     <div className='navbar'>
@@ -27,13 +35,16 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div
-          className='avatarContainer'
-          onClick={() => history.push('/profile')}
-        >
-          <div className='avatar'>
+        <div className='avatarWrapper'>
+          <div
+            className='avatarContainer'
+            onClick={() => history.push('/profile')}
+          >
             <p>AVATAR</p>
           </div>
+          <p className='logoutText' onClick={handleLogout}>
+            LOGOUT
+          </p>
         </div>
       </div>
     </div>

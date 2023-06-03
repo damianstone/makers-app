@@ -2,12 +2,16 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-const Input = (props) => {
+const LoginInput = (props) => {
   return (
     <Box
       component='form'
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch', color: '#0000' },
+        '& .MuiTextField-root': {
+          m: 1,
+          width: '25ch',
+          color: '#0000',
+        },
       }}
       noValidate
       autoComplete='off'
@@ -27,4 +31,4 @@ const Input = (props) => {
   );
 };
 
-export default Input;
+export default LoginInput;
