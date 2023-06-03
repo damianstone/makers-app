@@ -1,0 +1,51 @@
+.homeScreen {
+  flex: 1;
+  padding: 15px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 100vh;
+}
+
+.contentSection {
+  padding-top: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sideBar {
+  width: 20%;
+  max-height: 100vh;
+  z-index: 1; /* Stay on top */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+  overflow-y: scroll;
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+.sidebar ::-webkit-scrollbar {
+  display: none;
+}
+
+.sideButton {
+  text-align: center;
+  margin-bottom: 30px;
+  width: 200px;
+  height: 40px;
+  background-color: #d9d9d9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.cards {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 80%;
+  min-height: 80vh;
+}
