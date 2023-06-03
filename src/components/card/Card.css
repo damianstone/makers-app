@@ -1,0 +1,133 @@
+.card {
+  width: 85%;
+  min-height: 30%;
+  background-color: #d9d9d9;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.companyPhoto {
+  padding: 10px;
+  width: 100%;
+  height: 15%;
+  justify-self: center;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  padding: 10px;
+}
+
+.profilePhotoContainer {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  background-color: cadetblue;
+  text-align: center;
+}
+
+.profileName {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+}
+.position {
+  font-size: 10px;
+}
+
+.textInfoContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 60%;
+}
+
+.companyName {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.companyDescription {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.interestsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.interestTitle {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.interestsList {
+  display: flex;
+  flex-direction: row;
+}
+
+.interestsList p {
+  color: red;
+}
+
+.companyInfoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.companyInfoWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.companyInfo {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
+}
+
+.companyInfo p {
+  padding: 0;
+  margin: 0;
+}
+
+.requestButton {
+  display: inline-block;
+  width: 150px;
+  height: 40px;
+  font-size: 15px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  background-color: #512888;
+  border: 0px;
+  transition: background 0.3s ease-in-out;
+  margin-bottom: 10px;
+}
+
+.requestButton:hover {
+  background-color: #6D3AB1;
+}

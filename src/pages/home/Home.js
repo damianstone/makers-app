@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import Navbar from '../../components/navbar/Navbar';
-import { SIDEBAR } from '../../data/sidebar';
-import './Home.css';
 import SideBar from '../../components/sidebar/SideBar';
+import Card from '../../components/card/Card';
+import './Home.css';
 
 const Home = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [auth, setAuth] = useState(null);
 
   const handleFilter = (param) => {
     // dispatch
@@ -26,10 +25,8 @@ const Home = () => {
       <div className='contentSection'>
         <SideBar navigate={navigate} handleFilter={handleFilter} />
         <div className='cards'>
-          <div>
-            <div>COMPANY PHOTO</div>
-            <div></div>
-          </div>
+          <p className='cardsTitle'>Startups - Agriculture</p>
+          <Card />
         </div>
       </div>
     </div>
