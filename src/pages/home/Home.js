@@ -4,22 +4,30 @@ import { useHistory } from 'react-router-dom';
 
 import Navbar from '../../components/navbar/Navbar';
 import { SIDEBAR } from '../../data/sidebar';
-import * as f from '../../store/actions/actions';
 import './Home.css';
 
 const Home = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [auth, setAuth] = useState(null);
 
-  const handleCreate = () => {
-    history.push('/create-proposal');
+  const handleFilter = (param) => {
+    // dispatch
+  };
+
+  const navigate = (section) => {
+    history.push(`/${section}`);
   };
 
   const renderSideCard = () => {
     return SIDEBAR.map((item) => {
       if (item.type === 'section') {
         return (
-          <div key={item.id} className='sideButton'>
+          <div
+            key={item.id}
+            className='sideButton'
+            onClick={() => navigate(item.value)}
+          >
             <p>{item.label}</p>
           </div>
         );
@@ -27,10 +35,13 @@ const Home = () => {
       if (item.type === 'filter') {
         return (
           <div>
-            <p>Industries</p>
+            <p className='industries'>Industries</p>
             {item.filter_values.map((filter) => (
-              <div>
-                <p>{filter.label}</p>
+              <div
+                className='filterParam'
+                onClick={() => handleFilter(filter.value)}
+              >
+                <p className='filterParamText'>{filter.label}</p>
               </div>
             ))}
           </div>

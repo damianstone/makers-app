@@ -8,6 +8,9 @@
 
 .contentSection {
   padding-top: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -21,6 +24,13 @@
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
   overflow-y: scroll;
   background: transparent; /* Optional: just make scrollbar invisible */
+
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;
+}
+
+.sideBar::-webkit-scrollbar {
+  display: none;
 }
 
 .sidebar ::-webkit-scrollbar {
@@ -39,6 +49,22 @@
   justify-content: center;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.industries {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.filterParam {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.filterParamText {
+  cursor: pointer;
+  margin-bottom: 15px;
+  padding: 0;
 }
 
 .cards {
