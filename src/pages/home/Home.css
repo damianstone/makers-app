@@ -3,8 +3,9 @@
   padding: 15px;
   overflow-x: hidden;
   overflow-y: hidden;
-  height: 100vh;
+
 }
+
 
 .contentSection {
   padding-top: 60px;
@@ -17,14 +18,26 @@
 }
 
 .cards {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   width: 80%;
-  min-height: 80vh;
+  min-height: 100vh;
+  max-height: 100vh;
   align-items: center;
+  overflow: auto;
+
+
+  z-index: 1; /* Stay on top */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
   overflow-y: scroll;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;
+}
+
+.cards::-webkit-scrollbar {
+  display: none;
 }
 
 .cardsTitle {
