@@ -8,6 +8,7 @@
 
 .profileContainer {
   padding: 20px;
+  padding-left: 80px;
   display: flex;
   flex-direction: row;
   justify-content: center;

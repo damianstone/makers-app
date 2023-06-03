@@ -17,19 +17,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
 const getStyles = (name, personName, theme) => {
   return {
     fontWeight:
@@ -39,15 +26,15 @@ const getStyles = (name, personName, theme) => {
   };
 };
 
-const MultipleSelect = ({ label }) => {
+const MultipleSelect = ({ label, valueList }) => {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [option, setOption] = React.useState([]);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
+    setOption(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value
     );
@@ -62,18 +49,18 @@ const MultipleSelect = ({ label }) => {
           id='demo-multiple-name'
           multiple
           fullWidth
-          value={personName}
+          value={option}
           onChange={handleChange}
           input={<OutlinedInput label={label} />}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {valueList.map((value) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              key={value.id}
+              value={value.label}
+              style={getStyles(value.label, option, theme)}
             >
-              {name}
+              {value.label}
             </MenuItem>
           ))}
         </Select>

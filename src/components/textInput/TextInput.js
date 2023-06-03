@@ -2,7 +2,9 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-const TextInput = () => {
+import './TextInput.css';
+
+const TextInput = ({ label, onChange, id }) => {
   return (
     <div className='inputComponent'>
       <Box
@@ -11,7 +13,7 @@ const TextInput = () => {
           maxWidth: '100%',
         }}
       >
-        <TextField fullWidth label='fullWidth' id='fullWidth' />
+        <TextField fullWidth label={label} id={id} onChange={onChange} />
       </Box>
     </div>
   );
