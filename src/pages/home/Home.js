@@ -33,7 +33,6 @@ const Home = () => {
   }, []);
 
   const handleFilter = (param) => {
-    console.log(param);
     setParam(param);
   };
 

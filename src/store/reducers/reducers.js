@@ -52,7 +52,7 @@ export const listProfilesReducer = (state = {}, action) => {
       };
     case c.LIST_PROFILES_SUCCESS:
       return {
-        data: { ...action.payload },
+        data: action.payload,
       };
     case c.LIST_PROFILES_FAIL:
       return {
@@ -70,16 +70,13 @@ export const updateProfileReducer = (state = {}, action) => {
     case c.UPDATE_PROFILE_REQUEST:
       return {
         loading: true,
-        success: false,
       };
     case c.UPDATE_PROFILE_SUCCESS:
       return {
         data: { ...action.payload },
-        success: true,
       };
     case c.UPDATE_PROFILE_FAIL:
       return {
-        loading: false,
         error: action.payload,
       };
     case c.UPDATE_PROFILE_RESET:
@@ -94,16 +91,13 @@ export const listInvitationsReducer = (state = {}, action) => {
     case c.LIST_INVITATIONS_REQUEST:
       return {
         loading: true,
-        success: false,
       };
     case c.LIST_INVITATIONS_SUCCESS:
       return {
-        data: { ...action.payload },
-        success: true,
+        data: action.payload,
       };
     case c.LIST_INVITATIONS_FAIL:
       return {
-        loading: false,
         error: action.payload,
       };
     case c.LIST_INVITATIONS_RESET:
@@ -118,16 +112,13 @@ export const sendInvitationReducer = (state = {}, action) => {
     case c.SEND_INVITATION_REQUEST:
       return {
         loading: true,
-        success: false,
       };
     case c.SEND_INVITATION_SUCCESS:
       return {
         data: { ...action.payload },
-        success: true,
       };
     case c.SEND_INVITATION_FAIL:
       return {
-        loading: false,
         error: action.payload,
       };
     case c.SEND_INVITATION_RESET:

@@ -151,7 +151,7 @@ export const listProfiles = () => {
       });
       
       dispatch({
-        type: c.LIST_INVITATIONS_SUCCESS,
+        type: c.LIST_PROFILES_SUCCESS,
         payload: data,
       });
     } catch (error) {
