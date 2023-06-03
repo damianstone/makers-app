@@ -16,6 +16,14 @@ const Home = () => {
   let path = location.pathname.substring(1);
   path = path.charAt(0).toUpperCase() + path.slice(1);
 
+  useEffect(() => {
+    const valueFromLocalStorage = localStorage.getItem('@userData');
+
+    if (!valueFromLocalStorage) {
+      history.push('/login');
+    }
+  }, []);
+
   const handleFilter = (param) => {
     console.log(param);
     setParam(param);

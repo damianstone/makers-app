@@ -27,11 +27,8 @@ const Login = () => {
 
   useEffect(() => {
     const valueFromLocalStorage = localStorage.getItem('@userData');
-    setAuth(valueFromLocalStorage);
 
-    console.log(valueFromLocalStorage);
-
-    if (auth) {
+    if (valueFromLocalStorage) {
       history.push('/startups');
     }
   }, []);
@@ -54,58 +51,65 @@ const Login = () => {
 
   return (
     <div className='screen'>
-      <div className='welcomeContainer'>
-        <h3 className='welcomeText'>Startups x Corporations</h3>
-      </div>
-      {registerError || loginError ? (
-        <p className='text'>Ups there is an error</p>
-      ) : null}
-      {loadingLogin || loadingRegister ? (
-        <p className='text'>Loading...</p>
-      ) : (
-        <>
-          <div className='inputContainer'>
+      <div className='loginWrapper'>
+        <div className='welcomeContainer'>
+          <h3 className='welcomeText'>Startups x Corporations</h3>
+        </div>
+
+        {registerError && (
+          <p className='error'>{registerError?.response?.data?.detail}</p>
+        )}
+
+        {loginError && (
+          <p className='error'>{loginError?.response?.data?.detail}</p>
+        )}
+
+        <div className='inputContainer'>
+          <LoginInput
+            handleChange={(e) => setEmail(e.target.value)}
+            label='email'
+            value={email}
+          />
+          <LoginInput
+            handleChange={(e) => setPassword(e.target.value)}
+            value={password}
+            label='password'
+            type='password'
+          />
+          {register ? (
             <LoginInput
-              onChange={(e) => setEmail(e.target.value)}
-              label='email'
-              value={email}
-            />
-            <LoginInput
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              label='password'
+              handleChange={(e) => setRepeatedPassword(e.target.value)}
+              label='Repeat password'
+              value={repeatedPassword}
               type='password'
             />
-            {register ? (
-              <LoginInput
-                onChange={(e) => setRepeatedPassword(e.target.value)}
-                label='Repeat password'
-                value={repeatedPassword}
-                type='password'
-              />
-            ) : null}
-          </div>
-          <div className='loginButtonContainer'>
+          ) : null}
+        </div>
+
+        {loadingLogin || loadingRegister ? (
+          <p className='text'>Loading...</p>
+        ) : (
+          <>
             <buttton
               className='loginButton'
               onClick={register ? handleRegister : handleLogin}
             >
               {register ? 'Register' : 'Login'}
             </buttton>
-          </div>
-          <div>
-            {register ? (
-              <p className='text' onClick={() => setRegister(false)}>
-                Already have an account ?
-              </p>
-            ) : (
-              <p className='text' onClick={() => setRegister(true)}>
-                Register
-              </p>
-            )}
-          </div>
-        </>
-      )}
+            <div>
+              {register ? (
+                <p className='text' onClick={() => setRegister(false)}>
+                  Already have an account ?
+                </p>
+              ) : (
+                <p className='text' onClick={() => setRegister(true)}>
+                  Register
+                </p>
+              )}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

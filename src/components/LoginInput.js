@@ -1,33 +1,27 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-const LoginInput = (props) => {
+const LoginInput = ({ label, handleChange, id, value, type }) => {
   return (
-    <Box
-      component='form'
-      sx={{
-        '& .MuiTextField-root': {
-          m: 1,
-          width: '25ch',
-          color: '#0000',
-        },
-      }}
-      noValidate
-      autoComplete='off'
-    >
-      <div>
+    <div className='inputComponent'>
+      <Box
+        sx={{
+          width: 350,
+          maxWidth: '100%',
+        }}
+      >
         <TextField
           required
-          id='outlined-required'
-          label={props.label}
-          type={props.type}
-          defaultValue={props.defaultValue}
-          onChange={props.onChange}
-          value={props.value}
+          fullWidth
+          label={label}
+          id={id}
+          onChange={handleChange}
+          value={value}
+          type={type}
         />
-      </div>
-    </Box>
+      </Box>
+    </div>
   );
 };
 
