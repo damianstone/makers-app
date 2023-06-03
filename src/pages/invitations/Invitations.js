@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 
+import { listProfiles } from '../../store/actions/actions';
 import { CARDS } from '../../data/cards';
 import Navbar from '../../components/navbar/Navbar';
 import SideBar from '../../components/sidebar/SideBar';
@@ -22,9 +23,14 @@ const Invitations = () => {
     history.push(`/${section}`);
   };
 
+  const navNavigate = (companyType) => {
+    dispatch(listProfiles(companyType, null));
+    history.push(`/${companyType}`);
+  };
+
   return (
     <div className='homeScreen'>
-      <Navbar />
+      <Navbar navigate={navNavigate} />
       <div className='contentSection'>
         <SideBar navigate={navigate} handleFilter={(f) => handleFilter(f)} />
         <div className='cards'>

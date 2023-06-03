@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
+import { listProfiles } from '../../store/actions/actions';
 import { PROFILE_INPUTS, COMPANY_INPUTS } from '../../data/inputs';
 import TextInput from '../../components/textInput/TextInput';
 import SelectInput from '../../components/select/SelectInput';
@@ -9,9 +12,16 @@ import './Profile.css';
 import TextTareaInput from '../../components/textTarea/TextTareaInput';
 
 const Profile = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [changedProperties, setChangedProperties] = useState({});
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [companyLogo, setCompanyLogo] = useState(null);
+
+  const navNavigate = (companyType) => {
+    dispatch(listProfiles(companyType, null));
+    history.push(`/${companyType}`);
+  };
 
   const handleImageUpload = (event, type) => {
     if (type === 'company') {
@@ -106,7 +116,7 @@ const Profile = () => {
 
   return (
     <div className='profileScreen'>
-      <Navbar />
+      <Navbar navigate={navNavigate} />
       <div className='profileWrapper'>
         <div className='profileContainer'>
           <div className='profileInformationContainer'>
