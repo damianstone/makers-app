@@ -104,8 +104,8 @@ export const getUser = () => {
       };
 
       const { data } = await axios({
-        method: 'POST',
-        url: `${BASE_URL}/api/users/${userData.id}`,
+        method: 'get',
+        url: `${BASE_URL}/api/users/${userData.id}/`,
         headers: config,
       });
 

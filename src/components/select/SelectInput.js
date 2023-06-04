@@ -13,10 +13,12 @@ const SelectInput = ({ options, label, value, handleChange, error }) => {
       }}
     >
       <InputLabel>{label}</InputLabel>
-      <Select value={value} onChange={handleChange} fullWidth error={error}>
-        <MenuItem value=''>
-          <em>None</em>
-        </MenuItem>
+      <Select
+        value={value ? value.toString() : ''}
+        onChange={handleChange}
+        fullWidth
+        error={error}
+      >
         {options.map((option) => (
           <MenuItem value={option.value}>{option.label}</MenuItem>
         ))}

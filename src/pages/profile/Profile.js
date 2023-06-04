@@ -28,7 +28,7 @@ const Profile = () => {
 
   const updateProfileReducer = useSelector((state) => state.updateProfile);
   const {
-    data: updatedProfile,
+    data: updateProfileSuccess,
     loading: loadingUpdate,
     error: errorUpdate,
   } = updateProfileReducer;
@@ -44,12 +44,22 @@ const Profile = () => {
     if (uploadData) {
       dispatch(getUser());
     }
+
+    if (updateProfileSuccess) {
+      alert('Profile updated succesfully!!');
+    }
+
+    dispatch({ type: 'UPDATE_PROFILE_RESET' });
     dispatch({ type: 'UPLOAD_IMAGE_RESET' });
-  }, [dispatch, uploadData]);
+  }, [dispatch, uploadData, updateProfileSuccess]);
 
   useEffect(() => {
     if (errorUpdate?.response?.data) {
-      alert(Object.keys(errorUpdate.response.data));
+      alert(
+        `Please complete the following fields: ${Object.keys(
+          errorUpdate.response.data
+        )}`
+      );
     }
     if (errorUpload) {
       alert('Error uploading your image');
@@ -75,10 +85,8 @@ const Profile = () => {
   };
 
   const handleChange = (backend_property, value) => {
-    console.log(changedProperties);
-    console.log(backend_property, value);
-
     if (backend_property === 'interests') {
+      console.log(backend_property, value);
       setChangedProperties({
         ...changedProperties,
         [backend_property]: [...value],
@@ -111,6 +119,7 @@ const Profile = () => {
       }
 
       if (input.type === 'select') {
+        console.log(changedProperties[input.backend_property]);
         return (
           <SelectInput
             key={input.id}
@@ -180,11 +189,13 @@ const Profile = () => {
             </div>
             <div className='profileImageWrapper'>
               <div className='profileImageContainer'>
-                <img
-                  className='profileImage'
-                  src={getImage(currentUser.photo)}
-                  alt='Profile'
-                />
+                {currentUser ? (
+                  <img
+                    className='profileImage'
+                    src={getImage(currentUser.photo)}
+                    alt='Profile'
+                  />
+                ) : null}
               </div>
               <input
                 type='file'
@@ -201,11 +212,13 @@ const Profile = () => {
             </div>
             <div className='profileImageWrapper'>
               <div className='profileImageContainer'>
-                <img
-                  className='profileImage'
-                  src={getImage(currentUser.company_photo)}
-                  alt='Company logo'
-                />
+                {currentUser ? (
+                  <img
+                    className='profileImage'
+                    src={getImage(currentUser.company_photo)}
+                    alt='Company'
+                  />
+                ) : null}
               </div>
               <input
                 type='file'

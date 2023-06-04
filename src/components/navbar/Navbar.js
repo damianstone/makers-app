@@ -15,6 +15,10 @@ const Navbar = ({ navigate }) => {
   const { data, loading, error } = currentUser;
 
   useEffect(() => {
+    dispatch(getUser());
+  }, []);
+
+  useEffect(() => {
     const valueFromLocalStorage = localStorage.getItem('@userData');
 
     if (!valueFromLocalStorage || error) {
@@ -66,7 +70,7 @@ const Navbar = ({ navigate }) => {
                 alt='profile'
               />
             )}
-            {!data?.photo && !loading && <p>${data.email}</p>}
+            {data && !data.photo && !loading && <p>${data.email}</p>}
           </div>
           <p className='logoutText' onClick={handleLogout}>
             LOGOUT

@@ -28,7 +28,6 @@ const getStyles = (name, personName, theme) => {
 
 const MultipleSelect = ({ label, options, handleChange, values, error }) => {
   const theme = useTheme();
-  const [option, setOption] = React.useState([]);
 
   // const handleChange = (event) => {
   //   const {
@@ -52,7 +51,7 @@ const MultipleSelect = ({ label, options, handleChange, values, error }) => {
         multiple
         fullWidth
         error={error}
-        value={values}
+        value={typeof values === 'string' ? values.split(',') : values}
         onChange={handleChange}
         input={<OutlinedInput label={label} />}
         MenuProps={MenuProps}
@@ -60,7 +59,7 @@ const MultipleSelect = ({ label, options, handleChange, values, error }) => {
         {options.map((value) => (
           <MenuItem
             key={value.id}
-            value={value.label}
+            value={value.value}
             style={getStyles(value.label, values, theme)}
           >
             {value.label}
