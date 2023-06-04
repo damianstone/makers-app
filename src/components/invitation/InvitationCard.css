@@ -14,17 +14,18 @@
   justify-self: center;
 }
 
-.companyPhotoContainer {
+.companyPhotoContainerINV {
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background-color: #512888;
+  background-color: #5785a7;
 }
 
 .companyImageStyle {
   width: 100%;
   height: 100%;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .cardContent {
@@ -41,11 +42,11 @@
   padding: 10px;
 }
 
-.profilePhotoContainer {
+.profilePhotoContainerINV {
   width: 100px;
   height: 100px;
   border-radius: 100px;
-  background-color: cadetblue;
+  background-color: #5785a7;
   text-align: center;
 }
 
@@ -53,15 +54,7 @@
   width: 100%;
   height: 100%;
   border-radius: 100px;
-}
-
-.profileName {
-  margin: 0;
-  padding: 0;
-  font-size: 15px;
-}
-.position {
-  font-size: 10px;
+  object-fit: cover;
 }
 
 .textInfoContainer {
@@ -104,10 +97,6 @@
   flex-direction: row;
 }
 
-.interestInv p {
-  font-weight: bold;
-  color: #2f5fdc;
-}
 
 .companyInfoContainer {
   display: flex;
@@ -128,11 +117,6 @@
   margin-bottom: 5px;
 }
 
-.companyInfo p {
-  padding: 0;
-  margin: 0;
-}
-
 .requestButtonInv {
   display: inline-block;
   width: 150px;
@@ -142,7 +126,7 @@
   text-decoration: none;
   color: white;
   border-radius: 10px;
-  background-color: #2f5fdc;
+  background-color: #5785a7;
   border: 0px;
   transition: background 0.3s ease-in-out;
   margin-bottom: 10px;
@@ -150,4 +134,13 @@
 
 .requestButtonInv:hover {
   background-color: #264aa7;
+}
+
+.interestInv p {
+  padding: 7px;
+  background-color: #5785a7;
+  margin-right: 10px;
+  border-radius: 30px;
+  color: white;
+  font-size: 12px;
 }

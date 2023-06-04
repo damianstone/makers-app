@@ -16,7 +16,7 @@ export const register = (email, password, repeated_password) => {
 
       const { data } = await axios({
         method: 'POST',
-        url: `${BASE_URL}/api/users/register/`,
+        url: `${BASE_URL}/api/users/`,
         headers: config,
         data: {
           email,

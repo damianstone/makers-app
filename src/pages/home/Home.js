@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { getUser, listProfiles } from '../../store/actions/actions';
 import Navbar from '../../components/navbar/Navbar';
@@ -62,7 +64,11 @@ const Home = () => {
             param ? ' - ' + param : ''
           }`}</p>
           {error && <p>Something went wrong</p>}
-          {loading && <p>Loading...</p>}
+          {loading && (
+            <Box sx={{ display: 'flex' }}>
+              <CircularProgress />
+            </Box>
+          )}
           {data && data.length <= 0 && <p>{`No ${pathTitle} found ;(`}</p>}
           {data &&
             data.length > 0 &&

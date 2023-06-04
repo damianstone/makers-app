@@ -1,6 +1,6 @@
 .card {
-  width: 90%;
-  min-height: 40%;
+  width: 95%;
+  min-height: 35%;
   background-color: #d9d9d9;
   display: flex;
   flex-direction: column;
@@ -18,13 +18,23 @@
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background-color: #512888;
+  background-color: #7c6c90;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.companyPhotoContainer p {
+  color: white;
+  font-size: 10px;
 }
 
 .companyImageStyle {
   width: 100%;
   height: 100%;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .cardContent {
@@ -45,14 +55,24 @@
   width: 100px;
   height: 100px;
   border-radius: 100px;
-  background-color: cadetblue;
+  background-color: #7c6c90;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profilePhotoContainer p {
+  color: white;
+  font-size: 10px;
 }
 
 .profileImageStyle {
   width: 100%;
   height: 100%;
   border-radius: 100px;
+  object-fit: cover;
 }
 
 .profileName {
@@ -61,7 +81,10 @@
   font-size: 15px;
 }
 .position {
-  font-size: 10px;
+  margin: 0;
+  padding: 0;
+  margin-top: 5px;
+  font-size: 12px;
 }
 
 .textInfoContainer {
@@ -104,9 +127,6 @@
   flex-direction: row;
 }
 
-.interestsList p {
-  color: red;
-}
 
 .companyInfoContainer {
   display: flex;
@@ -127,11 +147,6 @@
   margin-bottom: 5px;
 }
 
-.companyInfo p {
-  padding: 0;
-  margin: 0;
-}
-
 .requestButton {
   display: inline-block;
   width: 150px;
@@ -141,7 +156,7 @@
   text-decoration: none;
   color: white;
   border-radius: 10px;
-  background-color: #512888;
+  background-color: #7c6c90;
   border: 0px;
   transition: background 0.3s ease-in-out;
   margin-bottom: 10px;
@@ -149,4 +164,27 @@
 
 .requestButton:hover {
   background-color: #6d3ab1;
+}
+
+.cardInfoProperty {
+  padding: 0;
+  margin: 0;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.cardInfoValue {
+  padding: 0;
+  margin: 0;
+  color: #6b6969;
+}
+
+
+.cardInterest {
+  padding: 7px;
+  background-color: #7c6c90;
+  margin-right: 10px;
+  border-radius: 30px;
+  color: white;
+  font-size: 12px;
 }

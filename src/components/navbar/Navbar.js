@@ -36,6 +36,11 @@ const Navbar = ({ navigate }) => {
     history.push('/login');
   };
 
+  function getInitial(email) {
+    let initial = email.charAt(0).toUpperCase();
+    return initial;
+  }
+
   return (
     <div className='navbar'>
       <div className='titleContainer'>
@@ -51,10 +56,6 @@ const Navbar = ({ navigate }) => {
             onClick={() => navigate('corporation')}
           >
             <p>Corporations</p>
-          </div>
-
-          <div className='itemContainer'>
-            <p>{data?.firstname}</p>
           </div>
         </div>
 
@@ -75,7 +76,7 @@ const Navbar = ({ navigate }) => {
                 alt='profile'
               />
             )}
-            {data && !data.photo && !loading && <p>${data.email}</p>}
+            {data && !data.photo && !loading && <p>{getInitial(data.email)}</p>}
           </div>
           <p className='logoutText' onClick={handleLogout}>
             LOGOUT

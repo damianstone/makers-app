@@ -19,7 +19,7 @@ const InvitationCard = ({
   return (
     <div className='invitationCard'>
       <div className='companyPhoto'>
-        <div className='companyPhotoContainer'>
+        <div className='companyPhotoContainerINV'>
           <img
             className='companyImageStyle'
             src={getImage(companyPhoto)}
@@ -29,7 +29,7 @@ const InvitationCard = ({
       </div>
       <div className='cardContent'>
         <div className='profileInfo'>
-          <div className='profilePhotoContainer'>
+          <div className='profilePhotoContainerINV'>
             <img
               className='profileImageStyle'
               src={getImage(profilePhoto)}
@@ -54,18 +54,24 @@ const InvitationCard = ({
         </div>
         <div className='companyInfoContainer'>
           <div className='companyInfoWrapper'>
-            <div className='companyInfo'>
-              <p>Number of employees: </p>
-              <p> {numberEmployees}</p>
-            </div>
-            <div className='companyInfo'>
-              <p>Valuation:</p>
-              <p>{`$${valuation} USD`}</p>
-            </div>
-            <div className='companyInfo'>
-              <p>Last investment: </p>
-              <p>{`$${lastInvestment} USD`}</p>
-            </div>
+            {numberEmployees && (
+              <div className='companyInfo'>
+                <p className='cardInfoProperty'>Number of employees:</p>
+                <p className='cardInfoValue'> {numberEmployees}</p>
+              </div>
+            )}
+            {valuation && (
+              <div className='companyInfo'>
+                <p className='cardInfoProperty'>Valuation:</p>
+                <p className='cardInfoValue'>{`$${valuation} USD`}</p>
+              </div>
+            )}
+            {lastInvestment && (
+              <div className='companyInfo'>
+                <p className='cardInfoProperty'>Last investment: </p>
+                <p className='cardInfoValue'>{` $${lastInvestment} USD`}</p>
+              </div>
+            )}
           </div>
           <button className='requestButtonInv'>Schedule meeting</button>
         </div>

@@ -9,7 +9,6 @@ import './Login.css';
 const Login = () => {
   const disptach = useDispatch();
   const history = useHistory();
-  const [auth, setAuth] = useState();
   const [register, setRegister] = useState(false);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -33,6 +32,12 @@ const Login = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (registerUser || userLogin) {
+      history.push('/startup');
+    }
+  }, [registerReducer, userLogin]);
+
   const handleLogin = () => {
     if (email && password) {
       disptach(f.login(email, password));
@@ -44,10 +49,6 @@ const Login = () => {
       disptach(f.register(email, password, repeatedPassword));
     }
   };
-
-  if (registerUser || userLogin) {
-    history.push('/startup');
-  }
 
   return (
     <div className='screen'>
