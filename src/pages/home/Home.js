@@ -107,7 +107,7 @@ const Home = () => {
                 <CircularProgress />
               </Box>
             ))}
-          {data?.length <= 0 && <p>{`No ${pathTitle} found ;(`}</p>}
+          {data?.length <= 0 && <p>{`No ${pathTitle} found`}</p>}
           {data?.length > 0 &&
             data.map((obj) => (
               <Card

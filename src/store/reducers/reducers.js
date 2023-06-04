@@ -15,6 +15,8 @@ export const userRegisterReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       };
+    case 'USER_LOGOUT':
+      return {};
     default:
       return state;
   }
@@ -36,6 +38,10 @@ export const userLoginReducer = (state = {}, action) => {
       return {
         loading: false,
         error: action.payload,
+      };
+    case c.USER_REGISTER_SUCCESS:
+      return {
+        data: { ...action.payload },
       };
     case c.UPLOAD_IMAGE_SUCCESS:
       return {
