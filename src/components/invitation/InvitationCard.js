@@ -17,7 +17,7 @@ const InvitationCard = ({
   interest,
 }) => {
   return (
-    <div className='card'>
+    <div className='invitationCard'>
       <div className='companyPhoto'>
         <div className='companyPhotoContainer'>
           <img
@@ -47,7 +47,7 @@ const InvitationCard = ({
           <div className='interestsContainer'>
             <p className='interestTitle'>Interests</p>
 
-            <div className='interestsList'>
+            <div className='interestInv'>
               <p>{interest}</p>
             </div>
           </div>
@@ -67,7 +67,7 @@ const InvitationCard = ({
               <p>{`$${lastInvestment} USD`}</p>
             </div>
           </div>
-          <button className='requestButton'>Request meeting</button>
+          <button className='requestButtonInv'>Schedule meeting</button>
         </div>
       </div>
     </div>
