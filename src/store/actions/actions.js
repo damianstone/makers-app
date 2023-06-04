@@ -282,7 +282,7 @@ export const listInvitations = () => {
   };
 };
 
-export const sendInvitation = (invitedId, message, interest) => {
+export const sendInvitation = (invitedId, obj) => {
   return async (dispatch) => {
     try {
       dispatch({ type: c.SEND_INVITATION_REQUEST });
@@ -299,7 +299,7 @@ export const sendInvitation = (invitedId, message, interest) => {
         method: 'POST',
         url: `${BASE_URL}/api/invitations/${invitedId}/actions/send-invitation/`,
         headers: config,
-        data: { message: 'message', interest: 'collaboration' },
+        data: obj,
       });
 
       dispatch({

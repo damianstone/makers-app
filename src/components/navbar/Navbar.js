@@ -37,8 +37,11 @@ const Navbar = ({ navigate }) => {
   };
 
   function getInitial(email) {
-    let initial = email.charAt(0).toUpperCase();
-    return initial;
+    if (email) {
+      let initial = email.charAt(0).toUpperCase();
+      return initial;
+    }
+    return 'N';
   }
 
   return (
@@ -76,7 +79,7 @@ const Navbar = ({ navigate }) => {
                 alt='profile'
               />
             )}
-            {data && !data.photo && !loading && <p>{getInitial(data.email)}</p>}
+            {data && !data.photo && <p>{getInitial(data?.email)}</p>}
           </div>
           <p className='logoutText' onClick={handleLogout}>
             LOGOUT

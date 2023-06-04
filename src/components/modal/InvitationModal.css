@@ -1,0 +1,19 @@
+.invitationButton {
+  display: inline-block;
+  width: 150px;
+  height: 40px;
+  font-size: 15px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  background-color: #7c6c90;
+  border: 0px;
+  transition: background 0.3s ease-in-out;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.invitationButton:hover {
+  background-color: #6d3ab1;
+}

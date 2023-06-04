@@ -4,6 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
+import InvitationModal from '../../components/modal/InvitationModal';
 import { listProfiles, sendInvitation } from '../../store/actions/actions';
 import Navbar from '../../components/navbar/Navbar';
 import SideBar from '../../components/sidebar/SideBar';
@@ -12,6 +13,10 @@ import './Home.css';
 
 const Home = () => {
   const [param, setParam] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [changedProperties, setChangedProperties] = useState({});
+  const [invitedId, setInvitedId] = useState();
+
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -33,7 +38,7 @@ const Home = () => {
     error: errorSendInvitation,
   } = sendInvitationReducer;
 
-  console.log(sendInvitationSuccess);
+  console.log({ ...errorSendInvitation });
 
   useEffect(() => {
     const valueFromLocalStorage = localStorage.getItem('@userData');
@@ -51,17 +56,16 @@ const Home = () => {
   useEffect(() => {
     if (sendInvitationSuccess) {
       alert('Invitation sent!');
+      setOpenModal(false);
       if (param) {
         dispatch(listProfiles(path, param));
       } else {
         dispatch(listProfiles(path, null));
       }
     }
-
     if (errorSendInvitation) {
       alert('Something went wrong ;(');
     }
-    
     dispatch({ type: 'SEND_INVITATION_RESET' });
   }, [dispatch, sendInvitationSuccess, errorSendInvitation]);
 
@@ -80,8 +84,10 @@ const Home = () => {
     history.push(`/${companyType}`);
   };
 
-  const handleSendInvitation = (id) => {
-    dispatch(sendInvitation(id));
+  const handleSendInvitation = () => {
+    if (changedProperties.message && changedProperties.interest && invitedId) {
+      dispatch(sendInvitation(invitedId, changedProperties));
+    }
   };
 
   return (
@@ -115,9 +121,21 @@ const Home = () => {
                 valuation={obj.company_valuation}
                 numberEmployees={obj.company_employees}
                 lastInvestment={obj.company_investment}
-                handleSendInvitation={() => handleSendInvitation(obj.id)}
+                handleSendInvitation={() => {
+                  setOpenModal(true);
+                  setInvitedId(obj.id);
+                }}
               />
             ))}
+          {openModal && (
+            <InvitationModal
+              open={openModal}
+              handleClose={() => setOpenModal(false)}
+              changedProperties={changedProperties}
+              setChangedProperties={setChangedProperties}
+              handleSend={handleSendInvitation}
+            />
+          )}
         </div>
       </div>
     </div>

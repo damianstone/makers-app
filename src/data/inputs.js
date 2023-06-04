@@ -261,3 +261,117 @@ export const COMPANY_INPUTS = [
     required: false,
   },
 ];
+
+export const MODAL_INPUTS = [
+  {
+    id: 'message',
+    backend_property: 'message',
+    label: 'Message',
+    type: 'texttarea',
+    required: false,
+  },
+  {
+    id: 'interest',
+    backend_property: 'interest',
+    label: 'Interest',
+    type: 'select',
+    required: false,
+    options: [
+      {
+        id: 1,
+        value: 'business-development',
+        label: 'Business Development',
+      },
+      {
+        id: 2,
+        value: 'collaboration',
+        label: 'Collaboration',
+      },
+      {
+        id: 3,
+        value: 'contracting-services',
+        label: 'Contracting Services',
+      },
+      {
+        id: 4,
+        value: 'distribution',
+        label: 'Distribution',
+      },
+      {
+        id: 5,
+        value: 'equity-investment',
+        label: 'Equity Investment',
+      },
+      {
+        id: 6,
+        value: 'franchising',
+        label: 'Franchising',
+      },
+      {
+        id: 7,
+        value: 'joint-venture',
+        label: 'Joint Venture',
+      },
+      {
+        id: 8,
+        value: 'licensing',
+        label: 'Licensing',
+      },
+      {
+        id: 9,
+        value: 'mergers-acquisitions',
+        label: 'Mergers & Acquisitions',
+      },
+      {
+        id: 10,
+        value: 'outsourcing',
+        label: 'Outsourcing',
+      },
+      {
+        id: 11,
+        value: 'product-development',
+        label: 'Product Development',
+      },
+      {
+        id: 12,
+        value: 'research-development',
+        label: 'Research & Development',
+      },
+      {
+        id: 13,
+        value: 'sales-marketing',
+        label: 'Sales & Marketing',
+      },
+      {
+        id: 14,
+        value: 'sponsorship',
+        label: 'Sponsorship',
+      },
+      {
+        id: 15,
+        value: 'strategic-alliance',
+        label: 'Strategic Alliance',
+      },
+      {
+        id: 16,
+        value: 'supply-chain',
+        label: 'Supply Chain',
+      },
+      {
+        id: 17,
+        value: 'technology-transfer',
+        label: 'Technology Transfer',
+      },
+      {
+        id: 18,
+        value: 'venture-capital',
+        label: 'Venture Capital',
+      },
+      {
+        id: 19,
+        value: 'white-labeling',
+        label: 'White Labeling',
+      },
+    ],
+  },
+];

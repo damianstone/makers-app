@@ -58,16 +58,17 @@ const Invitations = () => {
           {invitations?.length > 0 &&
             invitations?.map((obj) => (
               <InvitationCard
-                companyPhoto={obj.company_photo}
-                profilePhoto={obj.photo}
-                firstname={obj.firstname}
-                lastname={obj.lastname}
-                position={obj.position}
-                companyName={obj.company_name}
-                companyDescription={obj.company_description}
-                valuation={obj.company_valuation}
-                numberEmployees={obj.company_employees}
-                lastInvestment={obj.company_investment}
+                companyPhoto={obj.sender.company_photo}
+                profilePhoto={obj.sender.photo}
+                firstname={obj.sender.firstname}
+                lastname={obj.sender.lastname}
+                position={obj.sender.position}
+                companyName={obj.sender.company_name}
+                companyDescription={obj.sender.company_description}
+                valuation={obj.sender.company_valuation}
+                numberEmployees={obj.sender.company_employees}
+                lastInvestment={obj.sender.company_investment}
+                message={obj.message}
                 interest={obj.interest}
               />
             ))}

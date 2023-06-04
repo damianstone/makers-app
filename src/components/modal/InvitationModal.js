@@ -3,8 +3,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-
-// import styles from './InvitationModal.module.css'
+import SelectInput from '../select/SelectInput';
+import TextTareaInput from '../textTarea/TextTareaInput';
+import { MODAL_INPUTS } from '../../data/inputs';
+import './InvitationModal.css';
 
 const style = {
   position: 'absolute',
@@ -18,14 +20,54 @@ const style = {
   p: 4,
 };
 
-const InvitationModal = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+const InvitationModal = ({
+  open,
+  handleClose,
+  changedProperties,
+  setChangedProperties,
+  handleSend,
+}) => {
+  const handleChange = (backend_property, value) => {
+    setChangedProperties({
+      ...changedProperties,
+      [backend_property]: value,
+    });
+  };
 
+  const renderInputs = () => {
+    return MODAL_INPUTS.map((input) => {
+      if (input.type === 'select') {
+        return (
+          <SelectInput
+            key={input.id}
+            id={input.id}
+            label={input.label}
+            options={input.options}
+            handleChange={(event) =>
+              handleChange(input.backend_property, event.target.value)
+            }
+            value={changedProperties[input.backend_property]}
+          />
+        );
+      }
+
+      if (input.type === 'texttarea') {
+        return (
+          <TextTareaInput
+            key={input.id}
+            label={input.label}
+            handleChange={(event) =>
+              handleChange(input.backend_property, event.target.value)
+            }
+            value={changedProperties[input.backend_property]}
+          />
+        );
+      }
+      return null;
+    });
+  };
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -33,12 +75,10 @@ const InvitationModal = () => {
         aria-describedby='modal-modal-description'
       >
         <Box sx={style}>
-          <Typography variant='h6' component='h2'>
-            Text in a modal
-          </Typography>
-          <Typography sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          {renderInputs()}
+          <button className='invitationButton' onClick={handleSend}>
+            Send invitation
+          </button>
         </Box>
       </Modal>
     </div>
