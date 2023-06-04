@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { getImage } from '../../utils/gets';
-import { listProfiles, updateProfile } from '../../store/actions/actions';
+import {
+  getUser,
+  listProfiles,
+  updateProfile,
+  uploadImage,
+} from '../../store/actions/actions';
 import { PROFILE_INPUTS, COMPANY_INPUTS } from '../../data/inputs';
 import TextTareaInput from '../../components/textTarea/TextTareaInput';
 import TextInput from '../../components/textInput/TextInput';
@@ -28,15 +33,28 @@ const Profile = () => {
     error: errorUpdate,
   } = updateProfileReducer;
 
+  const uploadImageReducer = useSelector((state) => state.uploadImage);
+  const { data: uploadData, error: errorUpload } = uploadImageReducer;
+
   useEffect(() => {
     setChangedProperties({ ...currentUser });
   }, []);
 
   useEffect(() => {
+    if (uploadData) {
+      dispatch(getUser());
+    }
+    dispatch({ type: 'UPLOAD_IMAGE_RESET' });
+  }, [dispatch, uploadData]);
+
+  useEffect(() => {
     if (errorUpdate?.response?.data) {
       alert(Object.keys(errorUpdate.response.data));
     }
-  }, [dispatch, errorUpdate]);
+    if (errorUpload) {
+      alert('Error uploading your image');
+    }
+  }, [dispatch, errorUpdate, errorUpload]);
 
   const navNavigate = (companyType) => {
     dispatch(listProfiles(companyType, null));
@@ -53,13 +71,8 @@ const Profile = () => {
   };
 
   const handleImageUpload = (backend_property, event) => {
-    setChangedProperties({
-      ...changedProperties,
-      [backend_property]: event.target.files[0],
-    });
+    dispatch(uploadImage(backend_property, event.target.files[0]));
   };
-
-  console.log({ ...errorUpdate });
 
   const handleChange = (backend_property, value) => {
     console.log(changedProperties);
@@ -169,7 +182,7 @@ const Profile = () => {
               <div className='profileImageContainer'>
                 <img
                   className='profileImage'
-                  src={getImage(changedProperties['photo'])}
+                  src={getImage(currentUser.photo)}
                   alt='Profile'
                 />
               </div>
@@ -190,7 +203,7 @@ const Profile = () => {
               <div className='profileImageContainer'>
                 <img
                   className='profileImage'
-                  src={getImage(changedProperties['company_photo'])}
+                  src={getImage(currentUser.company_photo)}
                   alt='Company logo'
                 />
               </div>

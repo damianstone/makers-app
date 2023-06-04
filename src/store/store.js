@@ -5,6 +5,7 @@ import {
   userLoginReducer,
   listProfilesReducer,
   updateProfileReducer,
+  uploadImageReducer,
   listInvitationsReducer,
   sendInvitationReducer,
 } from './reducers/reducers';
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   updateProfile: updateProfileReducer,
   listInvitations: listInvitationsReducer,
   sendInvitation: sendInvitationReducer,
+  uploadImage: uploadImageReducer
 });
 
 const userInfoFromStorage = localStorage.getItem('@userData')

@@ -37,6 +37,10 @@ export const userLoginReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       };
+    case c.UPLOAD_IMAGE_SUCCESS:
+      return {
+        data: { ...action.payload },
+      };
     case 'USER_LOGOUT':
       return {};
     default:
@@ -80,6 +84,27 @@ export const updateProfileReducer = (state = {}, action) => {
         error: action.payload,
       };
     case c.UPDATE_PROFILE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const uploadImageReducer = (state = {}, action) => {
+  switch (action.type) {
+    case c.UPLOAD_IMAGE_REQUEST:
+      return {
+        loading: true,
+      };
+    case c.UPLOAD_IMAGE_SUCCESS:
+      return {
+        data: { ...action.payload },
+      };
+    case c.UPLOAD_IMAGE_FAIL:
+      return {
+        error: action.payload,
+      };
+    case c.UPLOAD_IMAGE_RESET:
       return {};
     default:
       return state;

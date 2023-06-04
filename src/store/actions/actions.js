@@ -173,25 +173,14 @@ export const updateProfile = (obj) => {
       const userData = JSON.parse(await localStorage.getItem('@userData'));
 
       const config = {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
         Accept: 'application/json',
         Authorization: `Bearer ${userData.token}`,
       };
 
-      // Creating form data
-      let formData = new FormData();
-
-      for (let key in obj) {
-          if (obj[key] instanceof File) {
-              formData.append(key, obj[key], obj[key].name);
-          } else {
-              formData.append(key, obj[key]);
-          }
-      }
-
       const { data } = await axios({
-        method: 'PATCH',
-        url: `${BASE_URL}/api/users/${userData.id}/`,
+        method: 'POST',
+        url: `${BASE_URL}/api/users/${userData.id}/actions/create-profile/`,
         headers: config,
         data: obj,
       });
@@ -210,6 +199,50 @@ export const updateProfile = (obj) => {
     } catch (error) {
       dispatch({
         type: c.UPDATE_PROFILE_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
+export const uploadImage = (backend_property, file) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: c.UPLOAD_IMAGE_REQUEST });
+
+      const userData = JSON.parse(await localStorage.getItem('@userData'));
+
+      const formData = new FormData();
+
+      formData.append(backend_property, file);
+      formData.append('image_id', userData.id);
+
+      const config = {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${userData.token}`,
+      };
+
+      const { data } = await axios({
+        method: 'POST',
+        url: `${BASE_URL}/api/users/${userData.id}/actions/upload-image/`,
+        headers: config,
+        data: formData,
+      });
+
+      await localStorage.setItem(
+        '@userData',
+        JSON.stringify({
+          ...data,
+        })
+      );
+
+      dispatch({
+        type: c.UPLOAD_IMAGE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: c.UPLOAD_IMAGE_FAIL,
         payload: error,
       });
     }
