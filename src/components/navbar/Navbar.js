@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { logout, getUser, listProfiles } from '../../store/actions/actions';
+
+import { getImage } from '../../utils/gets';
+import { logout, getUser } from '../../store/actions/actions';
 
 import './Navbar.css';
-
-const BASE_URL = 'http://127.0.0.1:8000';
 
 const Navbar = ({ navigate }) => {
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ const Navbar = ({ navigate }) => {
             {data?.photo && !loading && (
               <img
                 className='avatarStyle'
-                src={`${BASE_URL}/static${data.photo}`}
+                src={getImage(data.photo)}
                 alt='profile'
               />
             )}

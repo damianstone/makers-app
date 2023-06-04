@@ -173,15 +173,27 @@ export const updateProfile = (obj) => {
       const userData = JSON.parse(await localStorage.getItem('@userData'));
 
       const config = {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
         Accept: 'application/json',
         Authorization: `Bearer ${userData.token}`,
       };
+
+      // Creating form data
+      let formData = new FormData();
+
+      for (let key in obj) {
+          if (obj[key] instanceof File) {
+              formData.append(key, obj[key], obj[key].name);
+          } else {
+              formData.append(key, obj[key]);
+          }
+      }
 
       const { data } = await axios({
         method: 'PATCH',
         url: `${BASE_URL}/api/users/${userData.id}/`,
         headers: config,
+        data: obj,
       });
 
       await localStorage.setItem(

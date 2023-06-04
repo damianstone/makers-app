@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { listProfiles } from '../../store/actions/actions';
+import { getImage } from '../../utils/gets';
+import { listProfiles, updateProfile } from '../../store/actions/actions';
 import { PROFILE_INPUTS, COMPANY_INPUTS } from '../../data/inputs';
+import TextTareaInput from '../../components/textTarea/TextTareaInput';
 import TextInput from '../../components/textInput/TextInput';
 import SelectInput from '../../components/select/SelectInput';
 import MultipleSelect from '../../components/multiSelect/MultiSelect';
 import Navbar from '../../components/navbar/Navbar';
 import './Profile.css';
-import TextTareaInput from '../../components/textTarea/TextTareaInput';
 
 const Profile = () => {
   const history = useHistory();
@@ -18,18 +19,36 @@ const Profile = () => {
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [companyLogo, setCompanyLogo] = useState(null);
 
+  const userReducer = useSelector((state) => state.userLogin);
+  const { data: currentUser } = userReducer;
+
+  const updateProfileReducer = useSelector((state) => state.updateProfile);
+  const {
+    data: updatedProfile,
+    loading: loadingUpdate,
+    error: errorUpdate,
+  } = updateProfileReducer;
+
+  useEffect(() => {
+    setChangedProperties({ ...currentUser });
+  }, []);
+
   const navNavigate = (companyType) => {
     dispatch(listProfiles(companyType, null));
     history.push(`/${companyType}`);
   };
 
-  const handleImageUpload = (event, type) => {
-    if (type === 'company') {
-      setCompanyLogo(URL.createObjectURL(event.target.files[0]));
-    }
-    if (type === 'profile') {
-      setProfilePhoto(URL.createObjectURL(event.target.files[0]));
-    }
+  const handleUpdate = () => {
+    dispatch(updateProfile(changedProperties));
+  };
+
+  console.log({ ...errorUpdate });
+
+  const handleImageUpload = (backend_property, event) => {
+    setChangedProperties({
+      ...changedProperties,
+      [backend_property]: event.target.files[0],
+    });
   };
 
   const handleChange = (backend_property, value) => {
@@ -118,6 +137,7 @@ const Profile = () => {
     <div className='profileScreen'>
       <Navbar navigate={navNavigate} />
       <div className='profileWrapper'>
+        {errorUpdate && <p className='errorTextUpdate'>ERROR</p>}
         <div className='profileContainer'>
           <div className='profileInformationContainer'>
             <div className='profileTitleContainer'>
@@ -127,14 +147,14 @@ const Profile = () => {
               <div className='profileImageContainer'>
                 <img
                   className='profileImage'
-                  src={profilePhoto}
+                  src={getImage(changedProperties['photo'])}
                   alt='Profile'
                 />
               </div>
               <input
                 type='file'
                 accept='image/*'
-                onChange={(e) => handleImageUpload(e, 'profile')}
+                onChange={(e) => handleImageUpload('photo', e)}
                 className='inputImage'
               />
             </div>
@@ -148,14 +168,14 @@ const Profile = () => {
               <div className='profileImageContainer'>
                 <img
                   className='profileImage'
-                  src={companyLogo}
+                  src={getImage(changedProperties['company_photo'])}
                   alt='Company logo'
                 />
               </div>
               <input
                 type='file'
                 accept='image/*'
-                onChange={(e) => handleImageUpload(e, 'company')}
+                onChange={(e) => handleImageUpload('company_photo', e)}
                 className='inputImage'
               />
             </div>
@@ -164,7 +184,9 @@ const Profile = () => {
         </div>
 
         <div className='saveButtonContainer'>
-          <button className='saveButton'>Save information</button>
+          <button className='saveButton' onClick={handleUpdate}>
+            Save information
+          </button>
         </div>
       </div>
     </div>

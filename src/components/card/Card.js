@@ -1,5 +1,6 @@
 import React from 'react';
-import { BASE_URL } from '../../environment';
+
+import { getImage } from '../../utils/gets';
 import './Card.css';
 
 const Card = ({
@@ -21,7 +22,7 @@ const Card = ({
         <div className='companyPhotoContainer'>
           <img
             className='companyImageStyle'
-            src={`${BASE_URL}/static${companyPhoto}`}
+            src={getImage(companyPhoto)}
             alt='Profile'
           />
         </div>
@@ -31,7 +32,7 @@ const Card = ({
           <div className='profilePhotoContainer'>
             <img
               className='profileImageStyle'
-              src={`${BASE_URL}/static${profilePhoto}`}
+              src={getImage(profilePhoto)}
               alt='Profile'
             />
           </div>
