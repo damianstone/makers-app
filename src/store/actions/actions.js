@@ -1,7 +1,6 @@
 import axios from 'axios';
+import { BASE_URL } from '../../environment';
 import * as c from '../../constants/constants';
-
-const BASE_URL = 'http://127.0.0.1:8000';
 
 // * --------------------------------------- USER ------------------------------------------------
 
@@ -283,10 +282,10 @@ export const listInvitations = () => {
   };
 };
 
-export const sendInvitation = (invitedId) => {
+export const sendInvitation = (invitedId, message, interest) => {
   return async (dispatch) => {
     try {
-      dispatch({ type: c.LIST_INVITATIONS_REQUEST });
+      dispatch({ type: c.SEND_INVITATION_REQUEST });
 
       const userData = JSON.parse(await localStorage.getItem('@userData'));
 
@@ -297,18 +296,19 @@ export const sendInvitation = (invitedId) => {
       };
 
       const { data } = await axios({
-        method: 'GET',
+        method: 'POST',
         url: `${BASE_URL}/api/invitations/${invitedId}/actions/send-invitation/`,
         headers: config,
+        data: { message: 'message', interest: 'collaboration' },
       });
 
       dispatch({
-        type: c.LIST_INVITATIONS_SUCCESS,
+        type: c.SEND_INVITATION_SUCCESS,
         payload: data,
       });
     } catch (error) {
       dispatch({
-        type: c.LIST_INVITATIONS_FAIL,
+        type: c.SEND_INVITATION_FAIL,
         payload: error,
       });
     }

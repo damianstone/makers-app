@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { getUser, listProfiles } from '../../store/actions/actions';
+import { listProfiles, sendInvitation } from '../../store/actions/actions';
 import Navbar from '../../components/navbar/Navbar';
 import SideBar from '../../components/sidebar/SideBar';
 import Card from '../../components/card/Card';
@@ -26,6 +26,15 @@ const Home = () => {
   const listProfilesReducer = useSelector((state) => state.listProfiles);
   const { data, loading, error } = listProfilesReducer;
 
+  const sendInvitationReducer = useSelector((state) => state.sendInvitation);
+  const {
+    data: sendInvitationSuccess,
+    loading: loadingSendInvitation,
+    error: errorSendInvitation,
+  } = sendInvitationReducer;
+
+  console.log(sendInvitationSuccess);
+
   useEffect(() => {
     const valueFromLocalStorage = localStorage.getItem('@userData');
 
@@ -38,6 +47,23 @@ const Home = () => {
     dispatch(listProfiles(path, null));
     setParam(null);
   }, [path]);
+
+  useEffect(() => {
+    if (sendInvitationSuccess) {
+      alert('Invitation sent!');
+      if (param) {
+        dispatch(listProfiles(path, param));
+      } else {
+        dispatch(listProfiles(path, null));
+      }
+    }
+
+    if (errorSendInvitation) {
+      alert('Something went wrong ;(');
+    }
+    
+    dispatch({ type: 'SEND_INVITATION_RESET' });
+  }, [dispatch, sendInvitationSuccess, errorSendInvitation]);
 
   const handleFilter = (param) => {
     setParam(param);
@@ -54,6 +80,10 @@ const Home = () => {
     history.push(`/${companyType}`);
   };
 
+  const handleSendInvitation = (id) => {
+    dispatch(sendInvitation(id));
+  };
+
   return (
     <div className='homeScreen'>
       <Navbar navigate={navNavigate} />
@@ -64,14 +94,14 @@ const Home = () => {
             param ? ' - ' + param : ''
           }`}</p>
           {error && <p>Something went wrong</p>}
-          {loading && (
-            <Box sx={{ display: 'flex' }}>
-              <CircularProgress />
-            </Box>
-          )}
-          {data && data.length <= 0 && <p>{`No ${pathTitle} found ;(`}</p>}
-          {data &&
-            data.length > 0 &&
+          {loading ||
+            (loadingSendInvitation && (
+              <Box sx={{ display: 'flex' }}>
+                <CircularProgress />
+              </Box>
+            ))}
+          {data?.length <= 0 && <p>{`No ${pathTitle} found ;(`}</p>}
+          {data?.length > 0 &&
             data.map((obj) => (
               <Card
                 companyPhoto={obj.company_photo}
@@ -85,6 +115,7 @@ const Home = () => {
                 valuation={obj.company_valuation}
                 numberEmployees={obj.company_employees}
                 lastInvestment={obj.company_investment}
+                handleSendInvitation={() => handleSendInvitation(obj.id)}
               />
             ))}
         </div>

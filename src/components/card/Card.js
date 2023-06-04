@@ -15,6 +15,7 @@ const Card = ({
   valuation,
   numberEmployees,
   lastInvestment,
+  handleSendInvitation,
 }) => {
   return (
     <div className='card'>
@@ -82,7 +83,9 @@ const Card = ({
               </div>
             )}
           </div>
-          <button className='requestButton'>Request meeting</button>
+          <button className='requestButton' onClick={handleSendInvitation}>
+            Request meeting
+          </button>
         </div>
       </div>
     </div>
