@@ -26,7 +26,7 @@ const getStyles = (name, personName, theme) => {
   };
 };
 
-const MultipleSelect = ({ label, options, handleChange, values }) => {
+const MultipleSelect = ({ label, options, handleChange, values, error }) => {
   const theme = useTheme();
   const [option, setOption] = React.useState([]);
 
@@ -51,6 +51,7 @@ const MultipleSelect = ({ label, options, handleChange, values }) => {
       <Select
         multiple
         fullWidth
+        error={error}
         value={values}
         onChange={handleChange}
         input={<OutlinedInput label={label} />}

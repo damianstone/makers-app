@@ -3,7 +3,7 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import InputLabel from '@mui/material/InputLabel';
 import Box from '@mui/material/Box';
 
-const TextTareaInput = ({ label, value, handleChange }) => {
+const TextTareaInput = ({ label, value, handleChange, error }) => {
   return (
     <Box
       sx={{
@@ -14,6 +14,7 @@ const TextTareaInput = ({ label, value, handleChange }) => {
       <InputLabel>{label}</InputLabel>
       <TextareaAutosize
         minRows={5}
+        error={error}
         placeholder='Minimum 3 rows'
         style={{ width: 500, maxWidth: '100%' }}
         value={value}

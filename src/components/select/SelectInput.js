@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 import Select from '@mui/material/Select';
 
-const SelectInput = ({ options, label, value, handleChange }) => {
+const SelectInput = ({ options, label, value, handleChange, error }) => {
   return (
     <Box
       sx={{
@@ -13,7 +13,7 @@ const SelectInput = ({ options, label, value, handleChange }) => {
       }}
     >
       <InputLabel>{label}</InputLabel>
-      <Select value={value} onChange={handleChange} fullWidth label='Age'>
+      <Select value={value} onChange={handleChange} fullWidth error={error}>
         <MenuItem value=''>
           <em>None</em>
         </MenuItem>

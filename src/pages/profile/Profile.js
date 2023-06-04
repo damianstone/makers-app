@@ -10,14 +10,13 @@ import TextInput from '../../components/textInput/TextInput';
 import SelectInput from '../../components/select/SelectInput';
 import MultipleSelect from '../../components/multiSelect/MultiSelect';
 import Navbar from '../../components/navbar/Navbar';
+import _ from 'lodash';
 import './Profile.css';
 
 const Profile = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [changedProperties, setChangedProperties] = useState({});
-  const [profilePhoto, setProfilePhoto] = useState(null);
-  const [companyLogo, setCompanyLogo] = useState(null);
 
   const userReducer = useSelector((state) => state.userLogin);
   const { data: currentUser } = userReducer;
@@ -33,16 +32,25 @@ const Profile = () => {
     setChangedProperties({ ...currentUser });
   }, []);
 
+  useEffect(() => {
+    if (errorUpdate?.response?.data) {
+      alert(Object.keys(errorUpdate.response.data));
+    }
+  }, [dispatch, errorUpdate]);
+
   const navNavigate = (companyType) => {
     dispatch(listProfiles(companyType, null));
     history.push(`/${companyType}`);
   };
 
   const handleUpdate = () => {
-    dispatch(updateProfile(changedProperties));
+    if (!_.isEqual(currentUser, changedProperties)) {
+      dispatch({ type: 'UPDATE_PROFILE_RESET' });
+      dispatch(updateProfile(changedProperties));
+    } else {
+      alert('No changes made!');
+    }
   };
-
-  console.log({ ...errorUpdate });
 
   const handleImageUpload = (backend_property, event) => {
     setChangedProperties({
@@ -50,6 +58,8 @@ const Profile = () => {
       [backend_property]: event.target.files[0],
     });
   };
+
+  console.log({ ...errorUpdate });
 
   const handleChange = (backend_property, value) => {
     console.log(changedProperties);
@@ -80,6 +90,9 @@ const Profile = () => {
               handleChange(input.backend_property, event.target.value)
             }
             value={changedProperties[input.backend_property]}
+            error={
+              errorUpdate?.response?.data[input.backend_property] ? true : false
+            }
           />
         );
       }
@@ -95,6 +108,9 @@ const Profile = () => {
               handleChange(input.backend_property, event.target.value)
             }
             value={changedProperties[input.backend_property]}
+            error={
+              errorUpdate?.response?.data[input.backend_property] ? true : false
+            }
           />
         );
       }
@@ -113,6 +129,9 @@ const Profile = () => {
                 ? changedProperties[input.backend_property]
                 : []
             }
+            error={
+              errorUpdate?.response?.data[input.backend_property] ? true : false
+            }
           />
         );
       }
@@ -126,6 +145,9 @@ const Profile = () => {
               handleChange(input.backend_property, event.target.value)
             }
             value={changedProperties[input.backend_property]}
+            error={
+              errorUpdate?.response?.data[input.backend_property] ? true : false
+            }
           />
         );
       }
