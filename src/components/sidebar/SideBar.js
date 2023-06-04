@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { listInvitations } from '../../store/actions/actions';
 import { SIDEBAR } from '../../data/sidebar';
 import './SideBar.css';
 
 const SideBar = ({ navigate, handleFilter }) => {
+  const dispatch = useDispatch();
+
+  const invitationsReducer = useSelector((state) => state.listInvitations);
+  const { data: invitations } = invitationsReducer;
+
+  useEffect(() => {
+    if (!invitations) {
+      dispatch(listInvitations());
+    }
+  }, []);
+
   const renderSideCard = () => {
     return SIDEBAR.map((item) => {
       if (item.type === 'section') {
@@ -13,7 +26,9 @@ const SideBar = ({ navigate, handleFilter }) => {
             className='sideButton'
             onClick={() => navigate(item.value)}
           >
-            <p>{item.label}</p>
+            <p>{`${item.label} ${
+              invitations ? '(' + invitations.length + ')' : ''
+            }`}</p>
           </div>
         );
       }

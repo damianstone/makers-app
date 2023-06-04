@@ -40,7 +40,9 @@ const Invitations = () => {
     history.push(`/${companyType}`);
   };
 
-  console.log({ ...invitations });
+  const handleOpenCalendar = (link) => {
+    window.open(link, '_blank');
+  };
 
   return (
     <div className='homeScreen'>
@@ -70,6 +72,9 @@ const Invitations = () => {
                 lastInvestment={obj.sender.company_investment}
                 message={obj.message}
                 interest={obj.interest}
+                handleOpenCalendar={() =>
+                  handleOpenCalendar(obj.sender.meeting_link)
+                }
               />
             ))}
         </div>

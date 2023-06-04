@@ -15,6 +15,8 @@ const InvitationCard = ({
   numberEmployees,
   lastInvestment,
   interest,
+  message,
+  handleOpenCalendar
 }) => {
   return (
     <div className='invitationCard'>
@@ -40,6 +42,10 @@ const InvitationCard = ({
           <p className='position'>{position}</p>
         </div>
         <div className='textInfoContainer'>
+          <div className='companyDescriptionContainer'>
+            <p className='companyName'>Message</p>
+            <p className='companyDescription'>{message}</p>
+          </div>
           <div className='companyDescriptionContainer'>
             <p className='companyName'>{companyName}</p>
             <p className='companyDescription'>{companyDescription}</p>
@@ -73,7 +79,7 @@ const InvitationCard = ({
               </div>
             )}
           </div>
-          <button className='requestButtonInv'>Schedule meeting</button>
+          <button className='requestButtonInv' onClick={handleOpenCalendar}>Schedule meeting</button>
         </div>
       </div>
     </div>

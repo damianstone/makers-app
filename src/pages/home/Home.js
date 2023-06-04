@@ -57,6 +57,7 @@ const Home = () => {
     if (sendInvitationSuccess) {
       alert('Invitation sent!');
       setOpenModal(false);
+      setChangedProperties({});
       if (param) {
         dispatch(listProfiles(path, param));
       } else {
