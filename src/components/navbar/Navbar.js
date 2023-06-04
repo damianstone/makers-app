@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { getImage } from '../../utils/gets';
 import { logout, getUser } from '../../store/actions/actions';
-
 import './Navbar.css';
 
 const Navbar = ({ navigate }) => {
@@ -62,7 +63,11 @@ const Navbar = ({ navigate }) => {
             className='avatarContainer'
             onClick={() => history.push('/profile')}
           >
-            {loading && <p>Loading</p>}
+            {loading && (
+              <Box sx={{ display: 'flex' }}>
+                <CircularProgress />
+              </Box>
+            )}
             {data?.photo && !loading && (
               <img
                 className='avatarStyle'

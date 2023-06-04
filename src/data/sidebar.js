@@ -1,10 +1,11 @@
+// {
+//   id: 111,
+//   value: 'explore',
+//   label: 'Explore',
+//   type: 'section',
+// },
+
 export const SIDEBAR = [
-  {
-    id: 111,
-    value: 'explore',
-    label: 'Explore',
-    type: 'section',
-  },
   {
     id: 222,
     value: 'invitations',

@@ -266,7 +266,7 @@ export const listInvitations = () => {
 
       const { data } = await axios({
         method: 'GET',
-        url: `${BASE_URL}/api/invitationsactions/my-invitations/`,
+        url: `${BASE_URL}/api/invitations/actions/my-invitations/`,
         headers: config,
       });
 
