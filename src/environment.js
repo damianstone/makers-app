@@ -1,5 +1,3 @@
-// export const BASE_URL = 'http://127.0.0.1:8000';
-export const MODE = 'prod';
-export const BASE_URL = 'https://makers-project.herokuapp.com';
+export const BASE_URL = process.env.REACT_APP_BASE_URL
+export const MODE = process.env.REACT_APP_MODE
 
-//https://makers-project.herokuapp.com
