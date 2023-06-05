@@ -1,4 +1,5 @@
-# Makers project 
+# Makers project in 5 days
+The following project is an MVP of a platform that seeks to make visible the existing opportunities between corporate companies and startups. In this way, companies can seek mutual benefits and collaboration possibilities when expanding or trying to get into a new market
 
 ## Initialize the project
 
