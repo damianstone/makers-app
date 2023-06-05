@@ -41,7 +41,10 @@ const Invitations = () => {
   };
 
   const handleOpenCalendar = (link) => {
-    window.open(link, '_blank');
+    if (!link.match(/^[a-zA-Z]+:\/\//)) {
+      link = 'https://' + link;
+    }
+    window.open(link, '_blank', 'noopener,noreferrer');
   };
 
   return (
