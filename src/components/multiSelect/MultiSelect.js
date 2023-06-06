@@ -29,16 +29,6 @@ const getStyles = (name, personName, theme) => {
 const MultipleSelect = ({ label, options, handleChange, values, error }) => {
   const theme = useTheme();
 
-  // const handleChange = (event) => {
-  //   const {
-  //     target: { value },
-  //   } = event;
-  //   setOption(
-  //     // On autofill we get a stringified value.
-  //     typeof value === 'string' ? value.split(',') : value
-  //   );
-  // };
-
   return (
     <Box
       sx={{

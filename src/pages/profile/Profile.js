@@ -86,7 +86,6 @@ const Profile = () => {
 
   const handleChange = (backend_property, value) => {
     if (backend_property === 'interests') {
-      console.log(backend_property, value);
       setChangedProperties({
         ...changedProperties,
         [backend_property]: [...value],
@@ -119,7 +118,6 @@ const Profile = () => {
       }
 
       if (input.type === 'select') {
-        console.log(changedProperties[input.backend_property]);
         return (
           <SelectInput
             key={input.id}
@@ -181,7 +179,6 @@ const Profile = () => {
     <div className='profileScreen'>
       <Navbar navigate={navNavigate} />
       <div className='profileWrapper'>
-        {errorUpdate && <p className='errorTextUpdate'>ERROR</p>}
         <div className='profileContainer'>
           <div className='profileInformationContainer'>
             <div className='profileTitleContainer'>

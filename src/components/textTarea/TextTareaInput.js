@@ -3,7 +3,7 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import InputLabel from '@mui/material/InputLabel';
 import Box from '@mui/material/Box';
 
-import "./TextTareaInput.css"
+import './TextTareaInput.css';
 
 const TextTareaInput = ({ label, value, handleChange, error }) => {
   return (
@@ -17,7 +17,7 @@ const TextTareaInput = ({ label, value, handleChange, error }) => {
       <TextareaAutosize
         minRows={5}
         error={error}
-        aria-label="maximum height"
+        aria-label='maximum height'
         style={{ width: 500, maxWidth: '100%' }}
         value={value}
         onChange={handleChange}

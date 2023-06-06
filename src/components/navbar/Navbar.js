@@ -69,7 +69,7 @@ const Navbar = ({ navigate }) => {
           >
             {loading && (
               <Box sx={{ display: 'flex' }}>
-                <CircularProgress />
+                <CircularProgress color='inherit' />
               </Box>
             )}
             {data?.photo && !loading && (

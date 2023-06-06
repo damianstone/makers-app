@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import { listInvitations, listProfiles } from '../../store/actions/actions';
-import { CARDS } from '../../data/cards';
 import Navbar from '../../components/navbar/Navbar';
 import SideBar from '../../components/sidebar/SideBar';
-import Card from '../../components/card/Card';
-import './Invitations.css';
 import InvitationCard from '../../components/invitation/InvitationCard';
+import './Invitations.css';
 
 const Invitations = () => {
   const dispatch = useDispatch();

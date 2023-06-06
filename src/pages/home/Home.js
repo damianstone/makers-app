@@ -38,8 +38,6 @@ const Home = () => {
     error: errorSendInvitation,
   } = sendInvitationReducer;
 
-  console.log({ ...errorSendInvitation });
-
   useEffect(() => {
     const valueFromLocalStorage = localStorage.getItem('@userData');
 
@@ -65,7 +63,7 @@ const Home = () => {
       }
     }
     if (errorSendInvitation) {
-      alert('Something went wrong ;(');
+      alert('Complete your profile to request meetings');
     }
     dispatch({ type: 'SEND_INVITATION_RESET' });
   }, [dispatch, sendInvitationSuccess, errorSendInvitation]);
@@ -101,12 +99,11 @@ const Home = () => {
             param ? ' - ' + param : ''
           }`}</p>
           {error && <p>Something went wrong</p>}
-          {loading ||
-            (loadingSendInvitation && (
-              <Box sx={{ display: 'flex' }}>
-                <CircularProgress />
-              </Box>
-            ))}
+          {loading || loadingSendInvitation ? (
+            <Box sx={{ display: 'flex' }}>
+              <CircularProgress color='inherit' />
+            </Box>
+          ) : null}
           {data?.length <= 0 && <p>{`No ${pathTitle} found`}</p>}
           {data?.length > 0 &&
             data.map((obj) => (
