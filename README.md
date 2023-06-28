@@ -29,3 +29,15 @@ Then:
 ```bash
 firebase deploy
 ```
+
+<p float="left" align="left">
+<img width="1440" alt="Screenshot 2023-06-24 at 8 34 08 pm" src="https://github.com/damianstone/makers-app/assets/63305840/60a1f21a-02ad-408a-b0ea-676da303c916">
+</p>
+
+<p float="left" align="left">
+<img width="1440" alt="Screenshot 2023-06-24 at 8 37 05 pm" src="https://github.com/damianstone/makers-app/assets/63305840/f0d71001-7d41-45d5-bf7b-062b78524023">
+</p>
+
+<p float="left" align="left">
+<img width="1440" alt="Screenshot 2023-06-24 at 8 37 13 pm" src="https://github.com/damianstone/makers-app/assets/63305840/af61a9f6-0404-46d5-9c79-5ef22086d657">
+</p>
